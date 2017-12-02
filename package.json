@@ -8,7 +8,8 @@
     "type": "git"
   },
   "scripts": {
-    "dev": "electron index.js"
+    "dev": "electron index.js",
+    "build": "webpack -w"
   },
   "author": "Miguh Ruiz <m@miguhruiz.xyz> (https://miguhruiz.xyz/)",
   "license": "MIT",

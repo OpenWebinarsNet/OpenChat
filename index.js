@@ -11,5 +11,5 @@ app.on('ready', () => {
         }
     })
 
-    win.loadURL(`file://${__dirname}/static/index.html`)
+    win.loadURL(`file://${__dirname}/build/index.html`)
 })

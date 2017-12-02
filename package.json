@@ -1,0 +1,26 @@
+{
+  "name": "OpenChat",
+  "version": "1.0.0",
+  "description": "Educational chat using ElectronJS",
+  "main": "index.js",
+  "repository": {
+    "url": "git@github.com:OpenWebinarsNet/OpenChat.git",
+    "type": "git"
+  },
+  "scripts": {
+    "dev": "electron index.js"
+  },
+  "author": "Miguh Ruiz <m@miguhruiz.xyz> (https://miguhruiz.xyz/)",
+  "license": "MIT",
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "electron": "^1.7.9",
+    "html-webpack-plugin": "^2.30.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "webpack": "^3.9.1"
+  }
+}

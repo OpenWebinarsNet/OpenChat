@@ -7,6 +7,7 @@ const config = {
         path: __dirname + '/build',
         filename: 'index.js'
     },
+    target: 'electron-renderer',
     module: {
         loaders: [
             {

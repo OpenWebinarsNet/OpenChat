@@ -1,14 +1,24 @@
 import React from 'react'
+import { ipcRenderer } from 'electron'
+
+import Message from '../Message/index.jsx'
 
 class MessagesBox extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            messages: null
+            messages: []
         }
     }
+    componentDidMount() {
+        ipcRenderer.send('requestMessages')
+
+        ipcRenderer.on('receiveMessages', (ev, messages) => {
+            this.setState({ messages })
+        })
+    }
     render() {
-        if(this.state.messages != null) {
+        if(this.state.messages.length > 0) {
             return(
                 <div>
                     {

@@ -6,6 +6,7 @@ class SendBox extends React.Component {
         super(props)
 
         this.sendMessage = this.sendMessage.bind(this)
+        this.postImage = this.postImage.bind(this)
     }
     sendMessage() {
         const messageObject = {
@@ -16,10 +17,14 @@ class SendBox extends React.Component {
 
         ipcRenderer.send('newMessage', messageObject)
     }
+    postImage() {
+        ipcRenderer.send('upload-dialog')
+    }
     render() {
         return(
             <div className="grid-x grid-margin-x">
-                <input type="text" id="send-message" className="large-11 cell" placeholder="Escribe tu mensaje aqui" />
+                <a className="button warning large-1 cell" onClick={this.postImage}>Foto</a>
+                <input type="text" id="send-message" className="large-10 cell" placeholder="Escribe tu mensaje aqui" />
                 <a className="button success large-1 cell" onClick={this.sendMessage}>Enviar</a>
             </div>
         )

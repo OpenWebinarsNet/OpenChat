@@ -1,5 +1,6 @@
-const { app, BrowserWindow, ipcMain } = require('electron')
+const { app, BrowserWindow, ipcMain, dialog } = require('electron')
 const admin = require('firebase-admin')
+const { uploadImage } = require('./utilities')
 
 let win
 let serviceAccount = require('./firebase_key.json')
@@ -38,5 +39,19 @@ ipcMain.on('requestMessages', (ev) => {
             messages.push(message.val())
         })
         ev.sender.send('receiveMessages', messages)
+    })
+})
+
+ipcMain.on('upload-dialog', (ev) => {
+    dialog.showOpenDialog(win, {
+        title: 'Elige la imagen que deseas subir',
+        properties: [
+            'openFile'
+        ],
+        filters: [
+            { name: 'Images', extensions: ['jpg', 'png', 'gif'] }
+        ]
+    }, (dir) => {
+        uploadImage(dir[0])
     })
 })

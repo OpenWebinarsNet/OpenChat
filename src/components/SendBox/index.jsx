@@ -10,7 +10,11 @@ class SendBox extends React.Component {
     }
     sendMessage() {
         const messageObject = {
-            message: document.getElementById('send-message').value,
+            message: 
+            {
+                type: 'text',
+                value: document.getElementById('send-message').value
+            },
             userURL: 'https://avatars.slack-edge.com/2017-11-27/279122939639_c199c00a34366734b118_72.jpg',
             userName: 'Miguh Ruiz'
         }

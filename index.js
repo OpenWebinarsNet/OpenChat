@@ -1,16 +1,8 @@
 const { app, BrowserWindow, ipcMain, dialog } = require('electron')
-const admin = require('firebase-admin')
-const { uploadImage } = require('./utilities')
+const { uploadImage, sendMessage } = require('./utilities')
+const { db } = require('./firebase')
 
 let win
-let serviceAccount = require('./firebase_key.json')
-
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: 'https://openchat17.firebaseio.com'
-})
-
-let db = admin.database()
 
 app.on('ready', () => {
     win = new BrowserWindow({
@@ -24,11 +16,7 @@ app.on('ready', () => {
     win.loadURL(`file://${__dirname}/build/index.html`)
 })
 
-ipcMain.on('newMessage', (ev, objectMessage) => {
-    const docRef = db.ref('messages')
-
-    docRef.push(objectMessage)
-})
+ipcMain.on('newMessage', (ev, message) => sendMessage(message))
 
 ipcMain.on('requestMessages', (ev) => {
     const docRef = db.ref('messages')
@@ -52,6 +40,6 @@ ipcMain.on('upload-dialog', (ev) => {
             { name: 'Images', extensions: ['jpg', 'png', 'gif'] }
         ]
     }, (dir) => {
-        uploadImage(dir[0])
+        uploadImage(ev, dir[0])
     })
 })

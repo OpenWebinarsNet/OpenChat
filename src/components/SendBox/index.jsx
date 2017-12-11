@@ -1,5 +1,6 @@
 import React from 'react'
 import { ipcRenderer } from 'electron'
+import firebase from 'firebase'
 
 class SendBox extends React.Component {
     constructor(props) {
@@ -9,14 +10,15 @@ class SendBox extends React.Component {
         this.postImage = this.postImage.bind(this)
     }
     sendMessage() {
+        const user = firebase.auth().currentUser
         const messageObject = {
             message: 
             {
                 type: 'text',
                 value: document.getElementById('send-message').value
             },
-            userURL: 'https://avatars.slack-edge.com/2017-11-27/279122939639_c199c00a34366734b118_72.jpg',
-            userName: 'Miguh Ruiz'
+            userURL: user.photoURL,
+            userName: user.displayName
         }
 
         ipcRenderer.send('newMessage', messageObject)

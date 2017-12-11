@@ -4,7 +4,7 @@ const Storage = require('@google-cloud/storage')
 const fs = require('fs')
 const { db } = require('./firebase')
 
-const sendMessage = function(db, message) {
+const sendMessage = function(message) {
     const docRef = db.ref('messages')
     
     docRef.push(message)

@@ -1,8 +1,9 @@
 const { app, BrowserWindow, ipcMain, dialog } = require('electron')
-const { uploadImage, sendMessage } = require('./utilities')
+const { uploadImage, sendMessage, notifyMessage } = require('./utilities')
 const { db } = require('./firebase')
 
 let win
+let sendNotification = false
 
 app.on('ready', () => {
     win = new BrowserWindow({
@@ -26,6 +27,9 @@ ipcMain.on('requestMessages', (ev) => {
         snapshot.forEach(message => {
             messages.push(message.val())
         })
+        let lastmsg = messages[messages.length - 1]
+        notifyMessage(sendNotification, lastmsg)
+        sendNotification = true
         ev.sender.send('receiveMessages', messages)
     })
 })

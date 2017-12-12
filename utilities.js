@@ -1,4 +1,4 @@
-const { ipcMain } = require('electron')
+const { ipcMain, Notification } = require('electron')
 
 const Storage = require('@google-cloud/storage')
 const fs = require('fs')
@@ -40,7 +40,18 @@ const uploadImage = function(ev, imageDir) {
     })
 }
 
+const notifyMessage = function(sendNotification, msg) {
+    if(sendNotification) {
+        let notifMsg = new Notification({
+            title: 'Nuevo mensaje',
+            body: `${msg.userName}: ${msg.message.value}`
+        })
+        notifMsg.show()
+    }
+}
+
 module.exports = {
     uploadImage,
-    sendMessage
+    sendMessage,
+    notifyMessage
 }

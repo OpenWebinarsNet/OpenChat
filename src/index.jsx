@@ -5,6 +5,10 @@ import SendBox from './components/SendBox/index.jsx'
 import MessagesBox from './components/MessagesBox/index.jsx'
 import AuthView from './components/AuthView/index.jsx'
 
+let appPadding = {
+    padding: '1em'
+}
+
 class App extends React.Component {
     constructor(props) {
         super(props)
@@ -26,7 +30,7 @@ class App extends React.Component {
             )
         } else {
             return(
-                <div className="react">
+                <div className="react" style={appPadding}>
                     <MessagesBox />
                     <SendBox />
                 </div>

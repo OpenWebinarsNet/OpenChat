@@ -2,6 +2,10 @@ import React from 'react'
 import { ipcRenderer } from 'electron'
 import firebase from 'firebase'
 
+let separateFromTop = {
+    marginTop: '1em'
+}
+
 class SendBox extends React.Component {
     constructor(props) {
         super(props)
@@ -28,7 +32,7 @@ class SendBox extends React.Component {
     }
     render() {
         return(
-            <div className="grid-x grid-margin-x">
+            <div className="grid-x grid-margin-x" style={separateFromTop}>
                 <a className="button warning large-1 cell" onClick={this.postImage}>Foto</a>
                 <input type="text" id="send-message" className="large-10 cell" placeholder="Escribe tu mensaje aqui" />
                 <a className="button success large-1 cell" onClick={this.sendMessage}>Enviar</a>
